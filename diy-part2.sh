@@ -29,11 +29,11 @@ sed -i 's/OpenWrt/ywgf88 build $(date "+%Y.%m.%d") @ OpenWrt/g' package/lean/def
 
 # 删除默认argon主题，并下载新argon主题
 rm -rf ./package/lean/luci-theme-argon
-git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git  ./package/lean/
+git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git  package/lean/luci-theme-argon
 #git lua-maxminddb 依赖
-git clone https://github.com/jerrykuku/lua-maxminddb.git ./package/lean/
+git clone https://github.com/jerrykuku/lua-maxminddb.git  package/lean/
 # Modify default IP
 sed -i 's/192.168.1.1/10.10.10.8/g' package/base-files/files/bin/config_generate
 # Modify default wireless name
 sed -i 's/OpenWrt/G-Dock/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
-© 2020 GitHub, Inc.
+
