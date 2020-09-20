@@ -10,5 +10,30 @@
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
 
+#Modify the kernel to 5.4:
+sed -i 's/KERNEL_PATCHVER:=4.19/KERNEL_PATCHVER:=5.4/g' target/linux/ipq40xx/Makefile
+
+# Modify the version number
+sed -i 's/OpenWrt/ywgf88 build $(date "+%Y.%m.%d") @ OpenWrt/g' package/lean/default-settings/files/zzz-default-settings
+
+# Add kernel build user
+[ -z $(grep "CONFIG_KERNEL_BUILD_USER=" .config) ] &&
+    echo 'CONFIG_KERNEL_BUILD_USER="ywgf88"' >>.config ||
+    sed -i 's@\(CONFIG_KERNEL_BUILD_USER=\).*@\1$"YWGF88"@' .config
+
+# Add kernel build domain
+[ -z $(grep "CONFIG_KERNEL_BUILD_DOMAIN=" .config) ] &&
+    echo 'CONFIG_KERNEL_BUILD_DOMAIN="GitHub Actions"' >>.config ||
+    sed -i 's@\(CONFIG_KERNEL_BUILD_DOMAIN=\).*@\1$"GitHub Actions"@' .config
+
+
+# 删除默认argon主题，并下载新argon主题
+rm -rf ./package/lean/luci-theme-argon
+git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git  ./package/lean/
+#git lua-maxminddb 依赖
+git clone https://github.com/jerrykuku/lua-maxminddb.git ./package/lean/
 # Modify default IP
-#sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/10.10.10.8/g' package/base-files/files/bin/config_generate
+# Modify default wireless name
+sed -i 's/OpenWrt/G-Dock/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
+© 2020 GitHub, Inc.
