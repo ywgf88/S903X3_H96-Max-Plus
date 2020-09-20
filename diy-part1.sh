@@ -15,3 +15,18 @@
 
 # Add a feed source
 #sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
+# Uncomment a feed source
+#sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
+
+# Add a feed source
+sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
+
+
+#Clone VSSR source code
+git clone https://github.com/jerrykuku/luci-app-vssr package/lean
+#Clone OpenAppFilter source code
+#git clone https://github.com/kyarazhan/OpenAppFilter ./package/lean
+#Clone Lienol source code
+#git clone https://github.com/Lienol/openwrt-package ./package/lean
+git clone https://github.com/kenzok8/openwrt-packages  package/openwrt-packages
+git clone https://github.com/kenzok8/small.git  package/openwrt-small
