@@ -13,12 +13,15 @@
 #Modify the kernel to 5.4:
 sed -i 's/KERNEL_PATCHVER:=4.19/KERNEL_PATCHVER:=5.4/g' target/linux/ipq40xx/Makefile
 
+# Modify hostname
+sed -i 's/OpenWrt/William_GDOCK/g' package/base-files/files/bin/config_generate
+
 # Modify the version number
-sed -i 's/OpenWrt/ywgf88 build $(date "+%Y.%m.%d") @ OpenWrt/g' package/lean/default-settings/files/zzz-default-settings
+sed -i 's/OpenWrt/William build $(date "+%Y.%m.%d") @ OpenWrt/g' package/lean/default-settings/files/zzz-default-settings
 
 # Add kernel build user
 [ -z $(grep "CONFIG_KERNEL_BUILD_USER=" .config) ] &&
-    echo 'CONFIG_KERNEL_BUILD_USER="ywgf88"' >>.config ||
+    echo 'CONFIG_KERNEL_BUILD_USER="William"' >>.config ||
     sed -i 's@\(CONFIG_KERNEL_BUILD_USER=\).*@\1$"YWGF88"@' .config
 
 # Add kernel build domain
