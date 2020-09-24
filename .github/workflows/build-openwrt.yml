@@ -34,8 +34,8 @@ on:
 #      - master
 #    paths:
 #      - '.config'
-#  watch:
-#    types: started
+  watch:
+    types: started
   repository_dispatch:
   workflow_dispatch:
     inputs:
