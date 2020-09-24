@@ -22,7 +22,7 @@ sed -i 's/OpenWrt/William build $(date "+%Y.%m.%d") @ OpenWrt/g' package/lean/de
 # Add kernel build user
 [ -z $(grep "CONFIG_KERNEL_BUILD_USER=" .config) ] &&
     echo 'CONFIG_KERNEL_BUILD_USER="William"' >>.config ||
-    sed -i 's@\(CONFIG_KERNEL_BUILD_USER=\).*@\1$"YWGF88"@' .config
+    sed -i 's@\(CONFIG_KERNEL_BUILD_USER=\).*@\1$"William"@' .config
 
 # Add kernel build domain
 [ -z $(grep "CONFIG_KERNEL_BUILD_DOMAIN=" .config) ] &&
