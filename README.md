@@ -8,6 +8,12 @@ Build OpenWrt using GitHub Actions
 
 [Read the details in my blog (in Chinese) | 中文教程](https://p3terx.com/archives/build-openwrt-with-github-actions.html)
 
+
+OpenWrt firmware for Newifi D2
+Auto build OpenWrt firmware for Newifi D2 via GitHub Actions
+
+GitHub release (latest by date)
+
 ## Usage
 
 - Click the [Use this template](https://github.com/P3TERX/Actions-OpenWrt/generate) button to create a new repository.
