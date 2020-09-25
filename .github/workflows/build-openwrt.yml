@@ -1,3 +1,4 @@
+
 #
 # Copyright (c) 2019-2020 P3TERX <https://p3terx.com>
 #
@@ -10,6 +11,20 @@
 
 name: Build OpenWrt
 
+on:
+  repository_dispatch:
+  release:
+    types: published
+  push:
+    branches:
+      - main
+    paths:
+      - '.config'
+  schedule:
+    - cron: 0 8 * * 5
+  watch:
+    types: started
+
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
@@ -17,32 +32,12 @@ env:
   CONFIG_FILE: .config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
+  SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
-  UPLOAD_COWTRANSFER: true
-  UPLOAD_WETRANSFER: true
-  UPLOAD_RELEASE: true
+  UPLOAD_COWTRANSFER: false
+  UPLOAD_WETRANSFER: false
   TZ: Asia/Shanghai
-
-on:
-  schedule:
-    - cron: 0 8 */5 * *
-#  release:
-#    types: published
-#  push:
-#    branches:
-#      - master
-#    paths:
-#      - '.config'
-  watch:
-    types: started
-  repository_dispatch:
-  workflow_dispatch:
-    inputs:
-      ssh:
-        description: 'SSH connection to Actions'
-        required: false
-        default: 'false'
 
 jobs:
   build:
@@ -69,7 +64,7 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-        git clone $REPO_URL -b $REPO_BRANCH openwrt
+        git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
     - name: Load custom feeds
       run: |
@@ -92,7 +87,7 @@ jobs:
         $GITHUB_WORKSPACE/$DIY_P2_SH
     - name: SSH connection to Actions
       uses: P3TERX/debugger-action@main
-      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
+      if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'ssh')
 
     - name: Download package
       id: package
@@ -136,7 +131,6 @@ jobs:
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-#        path: openwrt/bin/targets/**/**
         path: ${{ env.FIRMWARE }}
 
     - name: Upload firmware to cowtransfer
@@ -145,44 +139,9 @@ jobs:
         curl -fsSL git.io/file-transfer | sh
         ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE} 2>&1 | tee cowtransfer.log
         echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
-        echo "::set-env name=COWTRANSFER_URL::$(cat cowtransfer.log | grep https | cut -f3 -d" ")"
     - name: Upload firmware to WeTransfer
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_WETRANSFER == 'true' && !cancelled()
       run: |
         curl -fsSL git.io/file-transfer | sh
         ./transfer wet -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee wetransfer.log
         echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
-        echo "::set-env name=WETRANSFER_URL::$(cat wetransfer.log | grep https | cut -f3 -d" ")"
-    - name: Generate tag
-      id: tag
-      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
-      run: |
-        echo "::set-env name=RELEASE_TAG::$(date +"%Y.%m.%d-%H%S")"
-        echo "🚀 Auto build" >> release.txt
-        [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ env.COWTRANSFER_URL }})" >> release.txt
-        [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ env.WETRANSFER_URL }})" >> release.txt
-        echo "::set-output name=status::success"
-    - name: Upload firmware to release
-      uses: softprops/action-gh-release@v1
-      if: steps.tag.outputs.status == 'success' && !cancelled()
-      env:
-        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-      with:
-        tag_name: ${{ env.RELEASE_TAG }}
-        body_path: release.txt
-        files: ${{ env.FIRMWARE }}/*
-
-    - name: Remove Old Artifacts
-      uses: c-hive/gha-remove-artifacts@v1
-      with:
-        age: '1 day'
-        skip-recent: 3
-
-    - name: Remove Old Releases
-      uses: dev-drprasad/delete-older-releases@v0.1.0
-      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
-      with:
-        keep_latest: 3
-        delete_tags: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
