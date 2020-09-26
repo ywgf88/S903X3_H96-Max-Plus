@@ -12,4 +12,4 @@ src-git targets https://github.com/openwrt/targets.git
 #src-git helloworld https://github.com/jerrykuku/luci-app-vssr
 #src-git kenzok https://github.com/kenzok8/openwrt-packages
 #src-git small https://github.com/kenzok8/small
-#src-git jerryk https://github.com/jerrykuku/openwrt-package
+src-git jerryk https://github.com/jerrykuku/openwrt-package
