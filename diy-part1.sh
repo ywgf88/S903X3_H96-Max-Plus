@@ -28,5 +28,5 @@ git clone https://github.com/jerrykuku/luci-app-vssr package/lean/luci-app-vssr
 #git clone https://github.com/kyarazhan/OpenAppFilter ./package/lean/OpenAppFilter
 #Clone Lienol source code
 #git clone https://github.com/Lienol/openwrt-package ./package/lean
-git clone https://github.com/kenzok8/openwrt-packages.git  package/openwrt-packages
+git clone https://github.com/kenzok8/openwrt-packages.git  package/diy-packages
 git clone https://github.com/kenzok8/small.git  package/openwrt-small
