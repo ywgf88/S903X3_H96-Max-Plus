@@ -10,7 +10,7 @@ src-git oldpackages http://git.openwrt.org/packages.git
 #src-link custom /usr/src/openwrt/custom-feed
 #src-git helloworld https://github.com/fw876/helloworld
 #src-git helloworld https://github.com/jerrykuku/luci-app-vssr
-#src-git small https://github.com/kenzok8/small
+src-git small https://github.com/kenzok8/small
 src-git jerryk https://github.com/jerrykuku/openwrt-package
 src-git kenzo https://github.com/kenzok8/openwrt-packages
 src-git lienol https://github.com.Lienol/openwrt-package
