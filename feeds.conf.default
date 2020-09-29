@@ -13,4 +13,4 @@ src-git luci https://github.com/coolsnowwolf/luci
 src-git small https://github.com/kenzok8/small
 src-git jerryk https://github.com/jerrykuku/openwrt-package
 src-git kenzo https://github.com/kenzok8/openwrt-packages
-src-git Lienol https://github.com.Lienol/openwrt-package
+#src-git Lienol https://github.com.Lienol/openwrt-package
