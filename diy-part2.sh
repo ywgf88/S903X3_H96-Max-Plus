@@ -11,10 +11,10 @@
 #
 
 #Modify the kernel to 5.4:
-sed -i 's/KERNEL_PATCHVER:=4.19/KERNEL_PATCHVER:=5.4/g' target/linux/ipq40xx/Makefile
+#sed -i 's/KERNEL_PATCHVER:=4.19/KERNEL_PATCHVER:=5.4/g' target/linux/ipq40xx/Makefile
 
 # Modify hostname
-sed -i 's/OpenWrt/William_GDOCK/g' package/base-files/files/bin/config_generate
+sed -i 's/OpenWrt/William_S903X3_H96-Max-Plus/g' package/base-files/files/bin/config_generate
 
 # Modify the version number
 sed -i 's/OpenWrt/William build $(date "+%Y.%m.%d") @ OpenWrt/g' package/lean/default-settings/files/zzz-default-settings
@@ -36,7 +36,7 @@ git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git  package/le
 #git lua-maxminddb 依赖
 #git clone https://github.com/jerrykuku/lua-maxminddb.git  package/lean/lua-maxminddb
 # Modify default IP
-sed -i 's/192.168.1.1/10.10.10.8/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/10.10.10.200/g' package/base-files/files/bin/config_generate
 # Modify default wireless name
-sed -i 's/OpenWrt/G-Dock/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
+sed -i 's/OpenWrt/S903X3_H96-Max-Plus/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
