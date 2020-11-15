@@ -40,3 +40,9 @@ sed -i 's/192.168.1.1/10.10.10.200/g' package/base-files/files/bin/config_genera
 # Modify default wireless name
 sed -i 's/OpenWrt/S903X3_H96-Max-Plus/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
+#readd cpufreq for aarch64
+sed -i 's/LUCI_DEPENDS.*/LUCI_DEPENDS:=\@\(arm\|\|aarch64\)/g' package/lean/luci-app-cpufreq/Makefile
+
+#replace coremark.sh with the new one
+rm package/lean/coremark/coremark.sh
+cp $GITHUB_WORKSPACE/general/coremark.sh package/lean/coremark/
