@@ -19,3 +19,5 @@ sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.
 
 #Clone VSSR source code
 sed -i '$a src-git jerryk https://github.com/jerrykuku/openwrt-package' feeds.conf.default
+#add dockerman
+sed -i '$a src-git dockerman https://github.com/lisaac/luci-app-dockerman' feeds.conf.default
