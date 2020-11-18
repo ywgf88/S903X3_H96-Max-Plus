@@ -22,8 +22,6 @@ on:
     - cron: 0 6 * * *
 
 
- watch:
-    types: [started]
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
