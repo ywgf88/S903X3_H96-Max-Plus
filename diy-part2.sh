@@ -55,6 +55,6 @@ mkdir parted
 cp luci-app-diskman/Parted.Makefile parted/Makefile
 
 #add luci-app-dockerman
-rm -rf ../lean/luci-app-docker
-git clone --depth=1 https://github.com/KEERMercer/luci-app-dockerman
-git clone --depth=1 https://github.com/lisaac/luci-lib-docker
+#rm -rf ../lean/luci-app-docker
+#git clone --depth=1 https://github.com/KEERMercer/luci-app-dockerman
+#git clone --depth=1 https://github.com/lisaac/luci-lib-docker
