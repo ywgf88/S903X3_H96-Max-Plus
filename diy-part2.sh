@@ -43,7 +43,7 @@ sed -i 's/192.168.1.1/10.10.10.200/g' package/base-files/files/bin/config_genera
 
 
 #add luci-app-dockerman
-rm -rf ../lean/luci-app-docker
+rm -rf package/lean/luci-app-docker
 
 git clone https://github.com/lisaac/luci-in-docker.git package/luci-in-docker
 git clone https://github.com/lisaac/luci-app-dockerman.git package/luci-app-dockerman
