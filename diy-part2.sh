@@ -14,7 +14,7 @@
 #sed -i 's/KERNEL_PATCHVER:=4.19/KERNEL_PATCHVER:=5.4/g' target/linux/ipq40xx/Makefile
 
 # Modify hostname
-sed -i 's/OpenWrt/William_S903X3_H96-Max-Plus/g' package/base-files/files/bin/config_generate
+sed -i 's/OpenWrt/William_S905X3/g' package/base-files/files/bin/config_generate
 
 # Modify the version number
 sed -i 's/OpenWrt/William build $(date "+%Y.%m.%d") @ OpenWrt/g' package/lean/default-settings/files/zzz-default-settings
