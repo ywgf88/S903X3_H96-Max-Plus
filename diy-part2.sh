@@ -57,6 +57,7 @@ git clone https://github.com/project-lede/luci-app-godproxy package/luci-app-god
 
 svn co https://github.com/garypang13/openwrt-packages/tree/master/luci-app-smartdns
 svn co https://github.com/garypang13/openwrt-packages/tree/master/tcping
+svn co https://github.com/garypang13/openwrt-packages/tree/master/lua-maxminddb
 
 #修改bypass的makefile
 find package/*/ feeds/*/ -maxdepth 2 -path "*luci-app-bypass/Makefile" | xargs -i sed -i 's/shadowsocksr-libev-ssr-redir/shadowsocksr-libev-alt/g' {}
