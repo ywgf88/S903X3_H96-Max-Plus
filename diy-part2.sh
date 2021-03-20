@@ -56,8 +56,8 @@ git clone https://github.com/lisaac/luci-app-dockerman.git package/luci-app-dock
 
 #add bypass
 git clone https://github.com/garypang13/luci-app-bypass package/luci-app-bypass
-git clone https://github.com/garypang13/luci-app-dnsfilter package/luci-app-dnsfilter
-git clone https://github.com/project-lede/luci-app-godproxy package/luci-app-godproxy
+#git clone https://github.com/garypang13/luci-app-dnsfilter package/luci-app-dnsfilter
+#git clone https://github.com/project-lede/luci-app-godproxy package/luci-app-godproxy
 git clone https://github.com/garypang13/smartdns-le package/smartdns-le
 
 #svn co https://github.com/garypang13/openwrt-packages/tree/master/luci-app-smartdns
