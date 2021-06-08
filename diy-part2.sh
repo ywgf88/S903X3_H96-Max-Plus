@@ -49,10 +49,10 @@ sed -i 's/LUCI_DEPENDS.*/LUCI_DEPENDS:=\@\(arm\|\|aarch64\)/g' package/lean/luci
 
 
 #add luci-app-dockerman
-rm -rf package/lean/luci-app-docker
+#rm -rf package/lean/luci-app-docker
 
-git clone https://github.com/lisaac/luci-in-docker.git package/luci-in-docker
-git clone https://github.com/lisaac/luci-app-dockerman.git package/luci-app-dockerman
+#git clone https://github.com/lisaac/luci-in-docker.git package/luci-in-docker
+#git clone https://github.com/lisaac/luci-app-dockerman.git package/luci-app-dockerman
 
 #add bypass
 git clone https://github.com/garypang13/luci-app-bypass package/luci-app-bypass
